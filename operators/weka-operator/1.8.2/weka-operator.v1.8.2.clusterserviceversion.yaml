@@ -1,0 +1,547 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  name: weka-operator.v1.8.2
+  namespace: placeholder
+  annotations:
+    alm-examples: '[{"apiVersion":"","kind":"","metadata":{"name":""},"spec":{}}]'
+    k8sMinVersion: ''
+    k8sMaxVersion: ''
+    categories: 'AI/Machine Learning,  Big Data, Storage'
+    certified: 'false'
+    createdAt: ''
+    description: 'Deploy, manage, and scale WEKA Data Platform within OpenShift clusters.'
+    containerImage: ''
+    support: ''
+    capabilities: Deep Insights
+    repository: ''
+spec:
+  displayName: WEKA Operator
+  description: >+
+    The WEKA Operator simplifies deploying, managing, and scaling the WEKA Data
+    Platform within a Kubernetes cluster. It provides custom Kubernetes
+    resources that define and manage WEKA components effectively.
+
+
+    By integrating WEKA's high-performance storage into Kubernetes, the Operator
+    supports compute-intensive applications like AI, ML, and HPC. This enhances
+    data access speed and boosts overall performance.
+
+
+    Learn more by visiting the documentation
+    [here](http://docs.weka.io/kubernetes/weka-operator-deployments)
+
+    The WEKA Operator automates tasks, enables periodic maintenance, and ensures
+    robust cluster management. This setup provides resilience and scalability
+    across the cluster. With its persistent, high-performance data layer, the
+    WEKA Operator enables efficient management of large datasets, ensuring
+    scalability and efficiency.
+
+
+    To learn more about how it works, visit the documentation
+    [here](https://docs.weka.io/kubernetes/weka-operator-deployments#how-it-works)
+
+
+    Pre-requisities for installing the WEKA Operator are described in the
+    documentation provided
+    [here](https://docs.weka.io/kubernetes/weka-operator-deployments#kubernetes-cluster-and-node-requirements)
+
+
+  maturity: stable
+  version: 1.8.2
+  replaces: ''
+  skips: []
+  minKubeVersion: ''
+  keywords:
+    - Storage
+    - Dynamic provisioning
+    - AI/ML
+    - Object storage
+    - Block Storage
+    - File Storage
+  maintainers:
+    - name: ''
+      email: ''
+  provider:
+    name: Weka
+  labels: {}
+  selector:
+    matchLabels: {}
+  links:
+    - name: Releases
+      url: 'https://get.weka.io/ui/operator'
+    - name: Documentation
+      url: >-
+        https://docs.weka.io/kubernetes/composable-clusters-for-multi-tenancy-in-kubernetes
+  icon:
+    - base64data: >-
+        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
+      mediatype: image/png
+  customresourcedefinitions:
+    owned: []
+    required: []
+  install:
+    strategy: deployment
+    spec:
+      permissions:
+        - serviceAccountName: weka-operator-controller-manager
+          rules:
+            - apiGroups:
+                - ''
+              resources:
+                - configmaps
+              verbs:
+                - get
+                - list
+                - watch
+                - create
+                - update
+                - patch
+                - delete
+            - apiGroups:
+                - coordination.k8s.io
+              resources:
+                - leases
+              verbs:
+                - get
+                - list
+                - watch
+                - create
+                - update
+                - patch
+                - delete
+            - apiGroups:
+                - ''
+              resources:
+                - events
+              verbs:
+                - create
+                - patch
+      clusterPermissions:
+        - serviceAccountName: weka-operator-controller-manager
+          rules:
+            - apiGroups:
+                - authentication.k8s.io
+              resources:
+                - tokenreviews
+              verbs:
+                - create
+            - apiGroups:
+                - authorization.k8s.io
+              resources:
+                - subjectaccessreviews
+              verbs:
+                - create
+        - serviceAccountName: weka-operator-controller-manager
+          rules:
+            - apiGroups:
+                - ''
+              resources:
+                - configmaps
+                - secrets
+              verbs:
+                - create
+                - get
+                - list
+                - update
+                - watch
+            - apiGroups:
+                - ''
+              resources:
+                - events
+              verbs:
+                - create
+                - patch
+            - apiGroups:
+                - ''
+              resources:
+                - namespaces
+              verbs:
+                - get
+                - list
+                - watch
+            - apiGroups:
+                - ''
+              resources:
+                - nodes
+              verbs:
+                - get
+                - list
+                - patch
+                - update
+                - watch
+            - apiGroups:
+                - ''
+              resources:
+                - nodes/status
+              verbs:
+                - get
+                - patch
+                - update
+            - apiGroups:
+                - ''
+              resources:
+                - pods
+                - services
+              verbs:
+                - create
+                - delete
+                - get
+                - list
+                - patch
+                - update
+                - watch
+            - apiGroups:
+                - ''
+              resources:
+                - pods/exec
+              verbs:
+                - create
+            - apiGroups:
+                - apps
+              resources:
+                - daemonsets
+                - deployments
+              verbs:
+                - create
+                - delete
+                - get
+                - list
+                - patch
+                - update
+                - watch
+            - apiGroups:
+                - batch
+              resources:
+                - jobs
+              verbs:
+                - create
+                - delete
+                - get
+                - list
+                - update
+                - watch
+            - apiGroups:
+                - metrics.k8s.io
+              resources:
+                - pods
+              verbs:
+                - get
+            - apiGroups:
+                - storage.k8s.io
+              resources:
+                - csidrivers
+                - storageclasses
+              verbs:
+                - create
+                - delete
+                - get
+                - list
+                - watch
+            - apiGroups:
+                - weka.weka.io
+              resources:
+                - driveclaims
+                - wekaclients
+                - wekaclusters
+                - wekacontainers
+                - wekamanualoperations
+                - wekapolicies
+              verbs:
+                - create
+                - delete
+                - get
+                - list
+                - patch
+                - update
+                - watch
+            - apiGroups:
+                - weka.weka.io
+              resources:
+                - driveclaims/finalizers
+                - wekaclients/finalizers
+                - wekaclusters/finalizers
+                - wekacontainers/finalizers
+                - wekamanualoperations/finalizers
+                - wekapolicies/finalizers
+              verbs:
+                - update
+            - apiGroups:
+                - weka.weka.io
+              resources:
+                - driveclaims/status
+                - wekaclients/status
+                - wekaclusters/status
+                - wekacontainers/status
+                - wekamanualoperations/status
+                - wekapolicies/status
+              verbs:
+                - get
+                - patch
+                - update
+      deployments:
+        - name: weka-operator-controller-manager
+          spec:
+            selector:
+              matchLabels:
+                control-plane: controller-manager
+            replicas: 1
+            template:
+              metadata:
+                annotations:
+                  kubectl.kubernetes.io/default-container: manager
+                  prometheus.io/port: '8080'
+                  prometheus.io/scrape: 'true'
+                  prometheus.io/path: /metrics
+                labels:
+                  control-plane: controller-manager
+                  app.kubernetes.io/component: weka-operator
+                  app.kubernetes.io/created-by: weka-operator
+                  app: weka-operator
+              spec:
+                securityContext:
+                  runAsNonRoot: false
+                imagePullSecrets:
+                  - name: quay-io-robot-secret
+                affinity:
+                  nodeAffinity:
+                    requiredDuringSchedulingIgnoredDuringExecution:
+                      nodeSelectorTerms:
+                        - matchExpressions:
+                            - key: kubernetes.io/arch
+                              operator: In
+                              values:
+                                - amd64
+                            - key: kubernetes.io/os
+                              operator: In
+                              values:
+                                - linux
+                tolerations: null
+                dnsPolicy: null
+                volumes:
+                  - name: tmpdir
+                    emptyDir: {}
+                containers:
+                  - args:
+                      - '--secure-listen-address=0.0.0.0:8443'
+                      - '--upstream=http://127.0.0.1:8080/'
+                      - '--logtostderr=true'
+                      - '--v=0'
+                    image: 'gcr.io/kubebuilder/kube-rbac-proxy:v0.13.1'
+                    name: kube-rbac-proxy
+                    ports:
+                      - containerPort: 8443
+                        name: https
+                        protocol: TCP
+                    resources:
+                      limits:
+                        cpu: 500m
+                        memory: 128Mi
+                      requests:
+                        cpu: 5m
+                        memory: 64Mi
+                    securityContext:
+                      allowPrivilegeEscalation: false
+                      capabilities:
+                        drop:
+                          - ALL
+                  - command:
+                      - /weka-operator
+                    ports:
+                      - containerPort: 8080
+                        name: metrics
+                        protocol: TCP
+                    env:
+                      - name: POD_NAME
+                        valueFrom:
+                          fieldRef:
+                            fieldPath: metadata.name
+                      - name: POD_UID
+                        valueFrom:
+                          fieldRef:
+                            fieldPath: metadata.uid
+                      - name: POD_NAMESPACE
+                        valueFrom:
+                          fieldRef:
+                            fieldPath: metadata.namespace
+                      - name: OTEL_DEPLOYMENT_IDENTIFIER
+                        value: ''
+                      - name: OTEL_EXPORTER_OTLP_ENDPOINT
+                        value: ''
+                      - name: VERSION
+                        value: v1.8.2
+                      - name: WEKA_OPERATOR_WEKA_HOME_ENDPOINT
+                        value: 'https://api.home.weka.io'
+                      - name: WEKA_OPERATOR_WEKA_HOME_CACERT_SECRET
+                        value: ''
+                      - name: WEKA_OPERATOR_WEKA_HOME_INSECURE
+                        value: 'false'
+                      - name: WEKA_OPERATOR_WEKA_HOME_ENABLE_STATS
+                        value: 'true'
+                      - name: WEKA_OPERATOR_DEBUG_SLEEP
+                        value: '3'
+                      - name: WEKA_OPERATOR_MAINTENANCE_SA_NAME
+                        value: weka-operator-maintenance
+                      - name: WEKA_MAINTENANCE_IMAGE
+                        value: quay.io/weka.io/busybox
+                      - name: WEKA_MAINTENANCE_IMAGE_PULL_SECRET
+                        value: ''
+                      - name: WEKA_OCP_PULL_SECRET
+                        value: ''
+                      - name: WEKA_OCP_TOOLKIT_IMAGE_BASE_URL
+                        value: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+                      - name: WEKA_COS_ALLOW_DISABLE_DRIVER_SIGNING
+                        value: 'false'
+                      - name: WEKA_COS_ALLOW_HUGEPAGE_CONFIG
+                        value: 'false'
+                      - name: WEKA_COS_GLOBAL_HUGEPAGE_SIZE
+                        value: 2M
+                      - name: WEKA_COS_GLOBAL_HUGEPAGE_COUNT
+                        value: '4000'
+                      - name: WEKA_COS_SERVICE_ACCOUNT_SECRET
+                        value: ''
+                      - name: OKE_ENABLE_NICS_ALLOCATION
+                        value: 'false'
+                      - name: SKIP_UNHEALTHY_TOLERATION
+                        value: 'false'
+                      - name: CLEANUP_REMOVED_NODES
+                        value: 'false'
+                      - name: CLEANUP_BACKENDS_ON_NODE_SELECTOR_MISMATCH
+                        value: 'false'
+                      - name: CLEANUP_CLIENTS_ON_NODE_SELECTOR_MISMATCH
+                        value: 'false'
+                      - name: CLEANUP_CONTAINERS_ON_TOLERATIONS_MISMATCH
+                        value: 'false'
+                      - name: LOG_LEVEL
+                        value: '0'
+                      - name: LOG_TIME_ONLY
+                        value: 'true'
+                      - name: HEALTH_PROBE_BIND_ADDRESS
+                        value: ':8081'
+                      - name: OPERATOR_METRICS_BIND_ADDRESS
+                        value: '127.0.0.1:8080'
+                      - name: ENABLE_LEADER_ELECTION
+                        value: 'true'
+                      - name: ENABLE_CLUSTER_API
+                        value: 'false'
+                      - name: RECONCILE_TIMEOUT
+                        value: 30m
+                      - name: KUBE_EXEC_TIMEOUT
+                        value: 5m
+                      - name: WEKA_ALLOC_ZOMBIE_DELETE_AFTER
+                        value: 5m
+                      - name: MAX_WORKERS_WEKACLUSTER
+                        value: '5'
+                      - name: MAX_WORKERS_WEKACONTAINER
+                        value: '50'
+                      - name: MAX_WORKERS_WEKACLIENT
+                        value: '5'
+                      - name: MAX_WORKERS_WEKAMANUALOPERATION
+                        value: '5'
+                      - name: MAX_WORKERS_WEKAPOLICY
+                        value: '5'
+                      - name: METRICS_CLUSTERS_ENABLED
+                        value: 'true'
+                      - name: METRICS_CLUSTERS_POLLING_RATE
+                        value: 60s
+                      - name: METRICS_CONTAINERS_ENABLED
+                        value: 'true'
+                      - name: METRICS_CONTAINERS_POLLING_RATE
+                        value: 60s
+                      - name: METRICS_CONTAINERS_REQUEST_TIMEOUT_REGISTER
+                        value: 3s
+                      - name: METRICS_CONTAINERS_REQUEST_TIMEOUT_GET_CONTAINER_INFO
+                        value: 10s
+                      - name: LOCAL_DATA_PVC
+                        value: ''
+                      - name: DNS_POLICY_K8S_NETWORK
+                        value: ''
+                      - name: DNS_POLICY_HOST_NETWORK
+                        value: ''
+                      - name: SIGN_DRIVES_IMAGE
+                        value: 'quay.io/weka.io/weka-sign-tool:v0.1.1-pciutils'
+                      - name: UPGRADE_COMPUTE_THRESHOLD_PERCENT
+                        value: '90'
+                      - name: UPGRADE_DRIVE_THRESHOLD_PERCENT
+                        value: '90'
+                      - name: UPGRADE_MAX_DEACTIVATING_CONTAINERS_PERCENT
+                        value: '10'
+                      - name: SKIP_CLIENT_NO_SCHEDULE_TOLERATION
+                        value: 'false'
+                      - name: SKIP_AUX_NO_SCHEDULE_TOLERATION
+                        value: 'false'
+                      - name: EVICT_CONTAINER_ON_DELETION
+                        value: 'false'
+                      - name: REMOVAL_THROTTLING_ENABLED
+                        value: 'true'
+                      - name: SKIP_CLIENTS_TOLERATION_VALIDATION
+                        value: 'true'
+                      - name: TOLERATIONS_MISMATCH_SETTINGS_ENABLE_IGNORED_TAINTS
+                        value: 'true'
+                      - name: TOLERATIONS_MISMATCH_SETTINGS_IGNORED_TAINTS
+                        value: >-
+                          node.kubernetes.io/unschedulable,node.kubernetes.io/not-ready,node.kubernetes.io/unreachable
+                      - name: DELETE_ENVOY_WITHOUT_S3_NEIGHBOR_TIMEOUT
+                        value: 5m
+                      - name: DELETE_UNSCHEDULABLE_PODS_AFTER
+                        value: 1m
+                      - name: CSI_INSTALLATION_ENABLED
+                        value: 'false'
+                      - name: CSI_STORAGE_CLASS_CREATION_DISABLED
+                        value: 'false'
+                      - name: CSI_IMAGE
+                        value: 'quay.io/weka.io/csi-wekafs:v2.7.6'
+                      - name: CSI_PROVISIONER_IMAGE
+                        value: 'registry.k8s.io/sig-storage/csi-provisioner:v5.1.0'
+                      - name: CSI_ATTACHER_IMAGE
+                        value: 'registry.k8s.io/sig-storage/csi-attacher:v4.8.0'
+                      - name: CSI_LIVENESSPROBE_IMAGE
+                        value: 'registry.k8s.io/sig-storage/livenessprobe:v2.15.0'
+                      - name: CSI_RESIZER_IMAGE
+                        value: 'registry.k8s.io/sig-storage/csi-resizer:v1.13.1'
+                      - name: CSI_SNAPSHOTTER_IMAGE
+                        value: 'registry.k8s.io/sig-storage/csi-snapshotter:v8.2.0'
+                      - name: CSI_REGISTRAR_IMAGE
+                        value: >-
+                          registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.13.0
+                    image: 'quay.io/weka.io/weka-operator:v1.8.2'
+                    imagePullPolicy: Always
+                    volumeMounts:
+                      - mountPath: /tmp
+                        name: tmpdir
+                    name: manager
+                    securityContext:
+                      allowPrivilegeEscalation: false
+                      capabilities:
+                        drop:
+                          - ALL
+                    livenessProbe:
+                      httpGet:
+                        path: /healthz
+                        port: 8081
+                      initialDelaySeconds: 15
+                      periodSeconds: 20
+                    readinessProbe:
+                      httpGet:
+                        path: /readyz
+                        port: 8081
+                      initialDelaySeconds: 5
+                      periodSeconds: 10
+                    resources:
+                      limits:
+                        cpu: 1000m
+                        memory: 4096Mi
+                      requests:
+                        cpu: 250m
+                        memory: 64Mi
+                serviceAccountName: weka-operator-controller-manager
+                terminationGracePeriodSeconds: 10
+  installModes:
+    - type: OwnNamespace
+      supported: true
+    - type: SingleNamespace
+      supported: true
+    - type: MultiNamespace
+      supported: false
+    - type: AllNamespaces
+      supported: false
